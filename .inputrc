@@ -1,0 +1,13 @@
+
+# From https://github.com/resultsreturned/to/wiki
+# Speeds up completion
+set show-all-if-unmodified on
+
+# Ignores case for auto-complete, moved from .bashrc
+set completion-ignore-case on
+
+# Allows using up and down arrows for completion from history
+# https://coderwall.com/p/oqtj8w
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+# set show-all-if-ambiguous on

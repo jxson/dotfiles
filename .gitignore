@@ -1,0 +1,11 @@
+.DS_Store
+*.tmproj
+*.sublime-*
+notes.md
+*.bak
+node_modules
+.lein-repl-history
+build/
+refactor/
+npm-debug.log
+.env
