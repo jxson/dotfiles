@@ -8,7 +8,7 @@
 # /usr/bin/gcc is now linked to /usr/bin/llvm-gcc-4.2, add the following to
 # your shell's start-up file: export CC=gcc-4.2
 # (The situation with LLVM and Ruby may improve. This is as of 07-23-2011.)
-export CC=gcc-4.2
+# export CC=gcc-4.2
 
 export COLOR_NONE='\[\e[0m\]' # No Color
 export COLOR_LIGHT_PURPLE='\[\e[1;35m\]'
@@ -45,6 +45,13 @@ source /usr/local/Cellar/autoenv/0.1.0/activate.sh
 autoenv_init # Make sure .env gets picked up when new terminal tabs are opened
 
 alias grep='grep --color=auto'
+alias ls='ls -G'
+alias rm='rm -i'
 
 source ~/.to/to.sh
 source ~/.nvm/nvm.sh
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
