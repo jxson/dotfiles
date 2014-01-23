@@ -6,7 +6,7 @@
 [core]
   excludesfile = ~/.gitignore
   quotepath = false
-  editor = mate -w
+  editor = sublime -n -w
 [color]
   ui = auto
 [color "branch"]
@@ -40,3 +40,5 @@
 	prompt = false
 [push]
 	default = simple
+[http]
+	sslVerify = true
