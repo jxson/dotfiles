@@ -45,7 +45,7 @@ source /usr/local/Cellar/autoenv/0.1.0/activate.sh
 autoenv_init # Make sure .env gets picked up when new terminal tabs are opened
 
 alias grep='grep --color=auto'
-alias ls='ls -G'
+alias ls='ls -G -l'
 alias rm='rm -i'
 alias sketch='open -a /Applications/Sketch.app/'
 alias ia-writer='open -a /Applications/iA\ Writer.app'
