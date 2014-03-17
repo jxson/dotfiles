@@ -54,16 +54,3 @@ alias marked='open -a /Applications/Marked.app'
 
 source ~/.to/to.sh
 source ~/.nvm/nvm.sh
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-### Adds clang 3.2 to the path for emscripten
-### https://github.com/kripken/emscripten/wiki/Getting-started-on-Mac-OS-X
-export PATH="/Users/jxson/Code/emscripten:$PATH"
-# ~/llvm32build/bin:\$PATH
-
-### Added by gvm https://github.com/moovweb/gvm
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
