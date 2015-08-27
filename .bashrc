@@ -14,9 +14,23 @@ export COLOR_NONE='\[\e[0m\]' # No Color
 export COLOR_LIGHT_PURPLE='\[\e[1;35m\]'
 export COLOR_ELECTRIC_YELLOW='\[\e[0;93m\]'
 
-source '/usr/local/etc/bash_completion.d/git-prompt.sh'
-source '/usr/local/etc/bash_completion.d/git-completion.bash'
-source '/usr/local/etc/bash_completion.d/npm'
+# Adds ~/.homebrew to path
+export PATH=$HOME/.homebrew/bin:$PATH
+export PATH=/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=./node_modules/.bin:$PATH
+
+if [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
+  source $(brew --prefix)/etc/bash_completion.d/git-completion.bash
+fi
+
+if [ -f $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]; then
+  source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
+fi
+
+if [ -f $(brew --prefix)/opt/autoenv/activate.sh ]; then
+  source $(brew --prefix)/opt/autoenv/activate.sh
+fi
 
 # Get the name of the branch we are on
 git_prompt_info() {
@@ -35,14 +49,7 @@ git_status() {
   fi
 }
 
-
-# PS1='\u@\h: \w $(git_prompt_info " (%s)")\n'$COLOR_ELECTRIC_YELLOW'⚡ '$COLOR_LIGHT_PURPLE'→ '$COLOR_NONE
 PS1=$COLOR_LIGHT_PURPLE'\u'$COLOR_NONE' at '$COLOR_ELECTRIC_YELLOW'\h'$COLOR_NONE' in \w $(git_prompt_info)\n'$COLOR_ELECTRIC_YELLOW'⚡ '$COLOR_NONE
-
-export PATH=/usr/local/bin:/usr/local/share/python:/usr/local/opt/ruby/bin:$PATH
-
-source /usr/local/Cellar/autoenv/0.1.0/activate.sh
-autoenv_init # Make sure .env gets picked up when new terminal tabs are opened
 
 alias grep='grep --color=auto'
 alias ls='ls -G -l'
@@ -54,3 +61,9 @@ alias marked='open -a /Applications/Marked.app'
 
 source ~/.to/to.sh
 source ~/.nvm/nvm.sh
+
+# HISTORY
+export HISTCONTROL=ignoredups:erasedups
+shopt -s histappend
+export HISTSIZE=100000
+export HISTFILESIZE=1000000
