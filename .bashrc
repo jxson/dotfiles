@@ -62,8 +62,33 @@ alias marked='open -a /Applications/Marked.app'
 source ~/.to/to.sh
 source ~/.nvm/nvm.sh
 
-# HISTORY
+# GCE completion
+source ~/.local/google-cloud-sdk/path.bash.inc
+source ~/.local/google-cloud-sdk/completion.bash.inc
+
+# added by travis gem
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+
+# Docker
+export DOCKER_HOST=tcp://192.168.59.103:2376
+export DOCKER_CERT_PATH=~/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1
+
+# Experiment with HISTORY.
 export HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
 export HISTSIZE=100000
 export HISTFILESIZE=1000000
+
+# Vanadium contributor setup.
+export JIRI_ROOT=~/Code/vanadium
+export PATH=$PATH:$JIRI_ROOT/devtools/bin
+export PATH=$PATH:$JIRI_ROOT/release/go/bin
+
+# Android developer setup.
+export ANDROID_HOME=~/Library/Android/sdk/
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools/
+export PATH=${PATH}:${ANDROID_HOME}/tools/
+
+# Flutter development setup.
+export PATH=${PATH}:~/Code/flutter/bin:
