@@ -86,9 +86,12 @@ export PATH=$PATH:$JIRI_ROOT/devtools/bin
 export PATH=$PATH:$JIRI_ROOT/release/go/bin
 
 # Android developer setup.
-export ANDROID_HOME=~/Library/Android/sdk/
-export PATH=${PATH}:${ANDROID_HOME}/platform-tools/
-export PATH=${PATH}:${ANDROID_HOME}/tools/
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+export PATH=${PATH}:${ANDROID_HOME}/tools
 
 # Flutter development setup.
 export PATH=${PATH}:~/Code/flutter/bin:
+# Needed for building flutter/engine on osx.
+# SEE: http://www.chromium.org/developers/how-tos/install-depot-tools
+export PATH=~/Code/depot_tools:${PATH}
