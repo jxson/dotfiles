@@ -24,6 +24,10 @@ if [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
   source $(brew --prefix)/etc/bash_completion.d/git-completion.bash
 fi
 
+if [ -f /usr/local/etc/bash_completion.d/npm ]; then
+  source /usr/local/etc/bash_completion.d/npm
+fi
+
 if [ -f $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]; then
   source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
 fi
@@ -49,18 +53,19 @@ git_status() {
   fi
 }
 
-PS1=$COLOR_LIGHT_PURPLE'\u'$COLOR_NONE' at '$COLOR_ELECTRIC_YELLOW'\h'$COLOR_NONE' in \w $(git_prompt_info)\n'$COLOR_ELECTRIC_YELLOW'⚡ '$COLOR_NONE
+PS1=$COLOR_LIGHT_PURPLE'\u'$COLOR_NONE' at '$COLOR_ELECTRIC_YELLOW'\h'$COLOR_NONE' in \w $(git_prompt_info)\n'$COLOR_ELECTRIC_YELLOW'→ '$COLOR_NONE
 
 alias grep='grep --color=auto'
 alias ls='ls -G -l'
 alias rm='rm -i'
 alias sketch='open -a /Applications/Sketch.app/'
-alias ia-writer='open -a /Applications/iA\ Writer.app'
 alias pixelmator='open -a /Applications/Pixelmator.app'
-alias marked='open -a /Applications/Marked.app'
 
 source ~/.to/to.sh
 source ~/.nvm/nvm.sh
+
+# Rust tools
+export PATH=$PATH:~/.multirust/toolchains/stable/cargo/bin
 
 # HISTORY
 export HISTCONTROL=ignoredups:erasedups
