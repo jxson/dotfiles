@@ -87,7 +87,7 @@ export HISTFILESIZE=1000000
 
 # Vanadium contributor setup.
 export JIRI_ROOT=~/Code/vanadium
-export PATH=$PATH:$JIRI_ROOT/devtools/bin
+export PATH=$PATH:$JIRI_ROOT/.jiri_root/scripts
 export PATH=$PATH:$JIRI_ROOT/release/go/bin
 
 # Android developer setup.
