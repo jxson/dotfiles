@@ -67,10 +67,6 @@ source ~/.nvm/nvm.sh
 # Rust tools
 export PATH=$PATH:~/.multirust/toolchains/stable/cargo/bin
 
-# GCE completion
-source ~/.local/google-cloud-sdk/path.bash.inc
-source ~/.local/google-cloud-sdk/completion.bash.inc
-
 # added by travis gem
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
