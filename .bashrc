@@ -15,9 +15,12 @@ export COLOR_LIGHT_PURPLE='\[\e[1;35m\]'
 export COLOR_ELECTRIC_YELLOW='\[\e[0;93m\]'
 
 # Adds ~/.homebrew to path
-export PATH=$HOME/.homebrew/bin:$PATH
+export BREW_PREFIX="${HOME}/.homebrew"
+
+# TODO: Check for brew path and install if it is missing.
+
+export PATH="${BREW_PREFIX}/bin:$PATH"
 export PATH=/usr/local/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH
 export PATH=./node_modules/.bin:$PATH
 
 if [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
@@ -79,17 +82,29 @@ export DOCKER_TLS_VERIFY=1
 export HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
 export HISTSIZE=100000
+# Enable sharing of history between parallel terminal sessions.
+export HIST_SYNC_COMMAND="history -a; history -c; history -r"
+# Append to the existing PROMPT_COMMAND so that terminal and tab titles retain
+# the default behavior.
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND} ${HIST_SYNC_COMMAND};"
+
+# $(update_terminal_cwd);
 export HISTFILESIZE=1000000
 
 # Vanadium contributor setup.
 export JIRI_ROOT=~/Code/vanadium
 export PATH=$PATH:$JIRI_ROOT/.jiri_root/scripts
 export PATH=$PATH:$JIRI_ROOT/release/go/bin
+export PATH="${PATH}:${JIRI_ROOT}/release/projects/go/bin"
 
 # Android developer setup.
-export ANDROID_HOME=~/Library/Android/sdk
-export PATH=${PATH}:${ANDROID_HOME}/platform-tools
-export PATH=${PATH}:${ANDROID_HOME}/tools
+export ANDROID_HOME="${HOME}/Library/Android/sdk/"
+export PATH="${ANDROID_HOME}/platform-tools:${PATH}"
+export PATH="${ANDROID_HOME}/tools:${PATH}"
+
+if [ -f $(brew --prefix)/etc/bash_completion.d/adb-completion.bash ]; then
+  source $(brew --prefix)/etc/bash_completion.d/adb-completion.bash
+fi
 
 # Flutter development setup.
 export PATH=${PATH}:~/Code/flutter/bin:
