@@ -27,8 +27,8 @@ if [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
   source $(brew --prefix)/etc/bash_completion.d/git-completion.bash
 fi
 
-if [ -f /usr/local/etc/bash_completion.d/npm ]; then
-  source /usr/local/etc/bash_completion.d/npm
+if [ -f $(brew --prefix)/etc/bash_completion.d/npm ]; then
+  source $(brew --prefix)/etc/bash_completion.d/npm
 fi
 
 if [ -f $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]; then
@@ -37,6 +37,10 @@ fi
 
 if [ -f $(brew --prefix)/opt/autoenv/activate.sh ]; then
   source $(brew --prefix)/opt/autoenv/activate.sh
+fi
+
+if [ -f /usr/local/bin/atom ]; then
+  export EDITOR=/usr/local/bin/atom
 fi
 
 # Get the name of the branch we are on
