@@ -73,11 +73,6 @@ export PATH=$PATH:~/.multirust/toolchains/stable/cargo/bin
 # added by travis gem
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
-# Docker
-export DOCKER_HOST=tcp://192.168.59.103:2376
-export DOCKER_CERT_PATH=~/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
-
 # Experiment with HISTORY.
 export HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
