@@ -94,13 +94,12 @@ export HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
 export HISTSIZE=100000
 # Enable sharing of history between parallel terminal sessions.
-export HIST_SYNC_COMMAND="history -a; history -c; history -r"
+# export HIST_SYNC_COMMAND="history -a; history -c; history -r"
 
 # Append to the existing PROMPT_COMMAND so that terminal and tab titles retain
 # the default behavior.
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND} ${HIST_SYNC_COMMAND};"
 
-# $(update_terminal_cwd);
 export HISTFILESIZE=1000000
 
 if [ -f $(brew --prefix)/etc/bash_completion.d/adb-completion.bash ]; then
