@@ -68,11 +68,23 @@ alias rm='rm -i'
 alias sketch='open -a /Applications/Sketch.app/'
 alias pixelmator='open -a /Applications/Pixelmator.app'
 
-source ~/.to/to.sh
-source ~/.nvm/nvm.sh
+# source ~/.to/to.sh
 
-# Rust tools
-export PATH=$PATH:~/.multirust/toolchains/stable/cargo/bin
+if [ -f ~/.nvm/nvm.sh ]; then
+  source ~/.nvm/nvm.sh
+fi
+
+if [ -f $(which atom) ]; then
+  export EDITOR="$(which atom)"
+fi
+
+# Rust
+# SEE: https://www.rustup.rs
+export PATH="$HOME/.cargo/bin:$PATH"
+# CARGO_HOME & RUST_SRC_PATH required for racer
+# SEE: https://github.com/phildawes/racer
+export CARGO_HOME="$HOME/.cargo"
+export RUST_SRC_PATH="$HOME/Code/rust/src"
 
 # added by travis gem
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
@@ -83,6 +95,7 @@ shopt -s histappend
 export HISTSIZE=100000
 # Enable sharing of history between parallel terminal sessions.
 export HIST_SYNC_COMMAND="history -a; history -c; history -r"
+
 # Append to the existing PROMPT_COMMAND so that terminal and tab titles retain
 # the default behavior.
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND} ${HIST_SYNC_COMMAND};"
@@ -90,23 +103,10 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND} ${HIST_SYNC_COMMAND};"
 # $(update_terminal_cwd);
 export HISTFILESIZE=1000000
 
-# Vanadium contributor setup.
-export JIRI_ROOT=~/Code/vanadium
-export PATH=$PATH:$JIRI_ROOT/.jiri_root/scripts
-export PATH=$PATH:$JIRI_ROOT/release/go/bin
-export PATH="${PATH}:${JIRI_ROOT}/release/projects/go/bin"
-
-# Android developer setup.
-export ANDROID_HOME="${HOME}/Library/Android/sdk/"
-export PATH="${ANDROID_HOME}/platform-tools:${PATH}"
-export PATH="${ANDROID_HOME}/tools:${PATH}"
-
 if [ -f $(brew --prefix)/etc/bash_completion.d/adb-completion.bash ]; then
   source $(brew --prefix)/etc/bash_completion.d/adb-completion.bash
 fi
 
-# Flutter development setup.
-export PATH=${PATH}:~/Code/flutter/bin:
-# Needed for building flutter/engine on osx.
-# SEE: http://www.chromium.org/developers/how-tos/install-depot-tools
-export PATH=~/Code/depot_tools:${PATH}
+# Open SSL Set up for custom homebrew location.
+# SEE: brew info openssl
+export CFLAGS="-I${BREW_PREFIX}/opt/openssl/include"
