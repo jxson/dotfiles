@@ -71,6 +71,9 @@ alias pixelmator='open -a /Applications/Pixelmator.app'
 source ~/.to/to.sh
 source ~/.nvm/nvm.sh
 
+[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+
+
 # Rust tools
 export PATH=$PATH:~/.multirust/toolchains/stable/cargo/bin
 
@@ -90,23 +93,6 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND} ${HIST_SYNC_COMMAND};"
 # $(update_terminal_cwd);
 export HISTFILESIZE=1000000
 
-# Vanadium contributor setup.
-export JIRI_ROOT=~/Code/vanadium
-export PATH=$PATH:$JIRI_ROOT/.jiri_root/scripts
-export PATH=$PATH:$JIRI_ROOT/release/go/bin
-export PATH="${PATH}:${JIRI_ROOT}/release/projects/go/bin"
-
-# Android developer setup.
-export ANDROID_HOME="${HOME}/Library/Android/sdk/"
-export PATH="${ANDROID_HOME}/platform-tools:${PATH}"
-export PATH="${ANDROID_HOME}/tools:${PATH}"
-
 if [ -f $(brew --prefix)/etc/bash_completion.d/adb-completion.bash ]; then
   source $(brew --prefix)/etc/bash_completion.d/adb-completion.bash
 fi
-
-# Flutter development setup.
-export PATH=${PATH}:~/Code/flutter/bin:
-# Needed for building flutter/engine on osx.
-# SEE: http://www.chromium.org/developers/how-tos/install-depot-tools
-export PATH=~/Code/depot_tools:${PATH}
