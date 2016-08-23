@@ -21,7 +21,11 @@ install: ../.gitignore ../.gitconfig ../.bashrc ../.bash_profile ../.inputrc
 ../.inputrc:
 	ln -s $(join $(cur-dir), .inputrc) $(join $(TARGET), .inputrc)
 
+../.hyperterm.js:
+	ln -s $(join $(cur-dir), .inputrc) $(join $(TARGET), .hyperterm.js)
+
 clean:
+	rm $(join $(TARGET), .hyperterm.js)
 	rm $(join $(TARGET), .gitignore)
 	rm $(join $(TARGET), .gitconfig)
 	rm $(join $(TARGET), .bashrc)

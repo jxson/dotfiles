@@ -28,11 +28,24 @@
   cookiefile = ~/.gitcookies
 [push]
   default = simple
-[ghi]
-  token = !security find-internet-password -a jxson -s github.com -l 'ghi token' -w
 [filter "lfs"]
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f
   required = true
 [alias]
-	zap-branches = !sh ~/.dotfiles/git-zap-branches.sh
+  zap-branches = !sh ~/.dotfiles/git-zap-branches.sh
+[transfer]
+  fsckobjects = true
+[fetch]
+  fsckobjects = true
+[receive]
+  fsckObjects = true
+[interactive]
+	diffFilter = diff-highlight
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[diff]
+  compactionHeuristic = true

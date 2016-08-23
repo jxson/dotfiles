@@ -68,14 +68,22 @@ alias rm='rm -i'
 alias sketch='open -a /Applications/Sketch.app/'
 alias pixelmator='open -a /Applications/Pixelmator.app'
 
-source ~/.to/to.sh
-source ~/.nvm/nvm.sh
+if [ -f ~/.nvm/nvm.sh ]; then
+  source ~/.nvm/nvm.sh
+  [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+fi
 
-[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+if [ -f $(which atom) ]; then
+  export EDITOR="$(which atom)"
+fi
 
-
-# Rust tools
-export PATH=$PATH:~/.multirust/toolchains/stable/cargo/bin
+# Rust
+# SEE: https://www.rustup.rs
+export PATH="$HOME/.cargo/bin:$PATH"
+# CARGO_HOME & RUST_SRC_PATH required for racer
+# SEE: https://github.com/phildawes/racer
+export CARGO_HOME="$HOME/.cargo"
+export RUST_SRC_PATH="$HOME/Code/rust/src"
 
 # added by travis gem
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
@@ -85,12 +93,12 @@ export HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
 export HISTSIZE=100000
 # Enable sharing of history between parallel terminal sessions.
-export HIST_SYNC_COMMAND="history -a; history -c; history -r"
+# export HIST_SYNC_COMMAND="history -a; history -c; history -r"
+
 # Append to the existing PROMPT_COMMAND so that terminal and tab titles retain
 # the default behavior.
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND} ${HIST_SYNC_COMMAND};"
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND} ${HIST_SYNC_COMMAND}"
 
-# $(update_terminal_cwd);
 export HISTFILESIZE=1000000
 
 if [ -f $(brew --prefix)/etc/bash_completion.d/adb-completion.bash ]; then
