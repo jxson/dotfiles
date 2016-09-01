@@ -16,6 +16,7 @@ export COLOR_ELECTRIC_YELLOW='\[\e[0;93m\]'
 
 # Adds ~/.homebrew to path
 export BREW_PREFIX="${HOME}/.homebrew"
+export CODE="${HOME}/Code"
 
 # TODO: Check for brew path and install if it is missing.
 
@@ -103,4 +104,13 @@ export HISTFILESIZE=1000000
 
 if [ -f $(brew --prefix)/etc/bash_completion.d/adb-completion.bash ]; then
   source $(brew --prefix)/etc/bash_completion.d/adb-completion.bash
+fi
+
+if [ -d "${CODE}/fuchsia" ]; then
+  export PATH="$HOME/Code/fuchsia/.jiri_root/scripts:$PATH"
+  export JIRI_ROOT=${JIRI_ROOT:=${HOME}/Code/fuchsia}
+fi
+
+if [[ -d "${CODE}/flutter" ]]; then
+  export PATH="${CODE}/flutter/bin:${PATH}"
 fi
