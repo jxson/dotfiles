@@ -114,3 +114,7 @@ fi
 if [[ -d "${CODE}/flutter" ]]; then
   export PATH="${CODE}/flutter/bin:${PATH}"
 fi
+
+if [[ -d "${BREW_PREFIX}/opt/android-sdk" ]]; then
+    export ANDROID_HOME="${BREW_PREFIX}/opt/android-sdk"
+fi
