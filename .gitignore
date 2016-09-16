@@ -1,10 +1,8 @@
 .DS_Store
 *.tmproj
 *.sublime-*
-notes.md
 *.bak
 .lein-repl-history
-refactor/
 .env
 *.patch
-.message
+commit-message.md
