@@ -106,9 +106,10 @@ if [ -f $(brew --prefix)/etc/bash_completion.d/adb-completion.bash ]; then
   source $(brew --prefix)/etc/bash_completion.d/adb-completion.bash
 fi
 
-if [ -d "${CODE}/fuchsia" ]; then
-  export PATH="$HOME/Code/fuchsia/.jiri_root/scripts:$PATH"
-  export JIRI_ROOT=${JIRI_ROOT:=${HOME}/Code/fuchsia}
+export FUCHSIA_WORKSPACE="${CODE}/fuchsia"
+if [ -d $FUCHSIA_WORKSPACE ]; then
+  export PATH="${FUCHSIA_WORKSPACE}/.jiri_root/scripts:$PATH"
+  export JIRI_ROOT="${FUCHSIA_WORKSPACE}"
 fi
 
 if [[ -d "${CODE}/flutter" ]]; then

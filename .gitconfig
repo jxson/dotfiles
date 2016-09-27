@@ -2,6 +2,7 @@
   name = Jason Campbell
   email = jasoncampbell@google.com
   username = jxson
+  signingkey = 46C0F214
 [github]
   user = jxson
 [core]
@@ -49,3 +50,7 @@
 	newHighlight = green bold 22
 [diff]
   compactionHeuristic = true
+[commit]
+  gpgsign = true
+[gpg]
+  program = gpg

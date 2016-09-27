@@ -1,11 +1,12 @@
 .DS_Store
 *.tmproj
 *.sublime-*
-notes.md
 *.bak
 .lein-repl-history
-refactor/
 .env
 *.patch
+<<<<<<< HEAD
 .message
+=======
+>>>>>>> 6144be1b2dfb1b739f64c8c442a0b4622771f817
 commit-message.md
