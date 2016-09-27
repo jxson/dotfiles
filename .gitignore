@@ -8,3 +8,4 @@ refactor/
 .env
 *.patch
 .message
+commit-message.md
