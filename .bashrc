@@ -1,4 +1,4 @@
-# PATH and common settings go here, .bashrc is loaded when new windows are opened
+  # PATH and common settings go here, .bashrc is loaded when new windows are opened
 #
 # .bash_profile is executed for login shells, while .bashrc is executed for
 # interactive non-login shells.
@@ -106,9 +106,10 @@ if [ -f $(brew --prefix)/etc/bash_completion.d/adb-completion.bash ]; then
   source $(brew --prefix)/etc/bash_completion.d/adb-completion.bash
 fi
 
-if [ -d "${CODE}/fuchsia" ]; then
-  export PATH="$HOME/Code/fuchsia/.jiri_root/scripts:$PATH"
-  export JIRI_ROOT=${JIRI_ROOT:=${HOME}/Code/fuchsia}
+export FUCHSIA_WORKSPACE="${CODE}/fuchsia"
+if [ -d $FUCHSIA_WORKSPACE ]; then
+  export PATH="${FUCHSIA_WORKSPACE}/.jiri_root/bin:$PATH"
+  export JIRI_ROOT="${FUCHSIA_WORKSPACE}"
 fi
 
 if [[ -d "${CODE}/flutter" ]]; then
@@ -123,8 +124,11 @@ if [[ -d "${BREW_PREFIX}/opt/android-ndk" ]]; then
     export NDK_HOME="${BREW_PREFIX}/opt/android-ndk"
 fi
 
-# Add fuchsia's jiri tools to $PATH if they are installed.
-export FUCHSIA_WORKSPACE="${HOME}/fuchsia"
-if [ -d "${FUCHSIA_WORKSPACE}/.jiri_root" ]; then
-  export PATH="${FUCHSIA_WORKSPACE}/.jiri_root/bin:$PATH"
+# Open SSL Set up for custom homebrew location.
+# SEE: brew info openssl
+if [[ -d "${BREW_PREFIX}/opt/openssl/include" ]]; then
+    export CFLAGS="-I${BREW_PREFIX}/opt/openssl/include"
 fi
+
+# Python xor Tensorflow
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
