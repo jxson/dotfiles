@@ -122,3 +122,9 @@ fi
 if [[ -d "${BREW_PREFIX}/opt/android-ndk" ]]; then
     export NDK_HOME="${BREW_PREFIX}/opt/android-ndk"
 fi
+
+# Add fuchsia's jiri tools to $PATH if they are installed.
+export FUCHSIA_WORKSPACE="${HOME}/fuchsia"
+if [ -d "${FUCHSIA_WORKSPACE}/.jiri_root" ]; then
+  export PATH="${FUCHSIA_WORKSPACE}/.jiri_root/bin:$PATH"
+fi
