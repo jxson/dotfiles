@@ -40,10 +40,6 @@ if [ -f $(brew --prefix)/opt/autoenv/activate.sh ]; then
   source $(brew --prefix)/opt/autoenv/activate.sh
 fi
 
-if [ -f /usr/local/bin/atom ]; then
-  export EDITOR=/usr/local/bin/atom
-fi
-
 # Get the name of the branch we are on
 git_prompt_info() {
   branch_prompt=$(__git_ps1 "%s")
@@ -106,10 +102,8 @@ if [ -f $(brew --prefix)/etc/bash_completion.d/adb-completion.bash ]; then
   source $(brew --prefix)/etc/bash_completion.d/adb-completion.bash
 fi
 
-export FUCHSIA_WORKSPACE="${CODE}/fuchsia"
-if [ -d $FUCHSIA_WORKSPACE ]; then
-  export PATH="${FUCHSIA_WORKSPACE}/.jiri_root/scripts:$PATH"
-  export JIRI_ROOT="${FUCHSIA_WORKSPACE}"
+if [ -f ~/.dotfiles/fuchsia-helpers.sh ]; then
+  source ~/.dotfiles/fuchsia-helpers.sh
 fi
 
 if [[ -d "${CODE}/flutter" ]]; then

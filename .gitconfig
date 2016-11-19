@@ -12,7 +12,7 @@
 [color]
   ui = auto
 [color "branch"]
-  current = yellow reverse
+  current = magenta bold
   local = yellow
   remote = green
 [color "diff"]
@@ -49,7 +49,10 @@
 	newNormal = green bold
 	newHighlight = green bold 22
 [diff]
+  tool = Kaleidoscope
   compactionHeuristic = true
+[difftool "Kaleidoscope"]
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [commit]
   gpgsign = true
 [gpg]
