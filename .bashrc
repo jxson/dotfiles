@@ -1,4 +1,4 @@
-# PATH and common settings go here, .bashrc is loaded when new windows are opened
+  # PATH and common settings go here, .bashrc is loaded when new windows are opened
 #
 # .bash_profile is executed for login shells, while .bashrc is executed for
 # interactive non-login shells.
@@ -117,3 +117,12 @@ fi
 if [[ -d "${BREW_PREFIX}/opt/android-ndk" ]]; then
     export NDK_HOME="${BREW_PREFIX}/opt/android-ndk"
 fi
+
+# Open SSL Set up for custom homebrew location.
+# SEE: brew info openssl
+if [[ -d "${BREW_PREFIX}/opt/openssl/include" ]]; then
+    export CFLAGS="-I${BREW_PREFIX}/opt/openssl/include"
+fi
+
+# Python xor Tensorflow
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
