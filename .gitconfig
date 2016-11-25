@@ -35,6 +35,7 @@
   required = true
 [alias]
   zap-branches = !sh ~/.dotfiles/git-zap-branches.sh
+  cl = push origin HEAD:refs/for/master
 [transfer]
   fsckobjects = true
 [fetch]
