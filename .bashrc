@@ -102,8 +102,11 @@ if [ -f $(brew --prefix)/etc/bash_completion.d/adb-completion.bash ]; then
   source $(brew --prefix)/etc/bash_completion.d/adb-completion.bash
 fi
 
-if [ -f ~/.dotfiles/fuchsia-helpers.sh ]; then
-  source ~/.dotfiles/fuchsia-helpers.sh
+export FUCHSIA_WORKSPACE="${CODE}/fuchsia"
+if [ -d $FUCHSIA_WORKSPACE ]; then
+  export PATH="${FUCHSIA_WORKSPACE}/.jiri_root/bin:$PATH"
+  export JIRI_ROOT="${FUCHSIA_WORKSPACE}"
+  source "${FUCHSIA_WORKSPACE}/scripts/env.sh"
 fi
 
 if [[ -d "${CODE}/flutter" ]]; then
@@ -123,8 +126,5 @@ fi
 if [[ -d "${BREW_PREFIX}/opt/openssl/include" ]]; then
     export CFLAGS="-I${BREW_PREFIX}/opt/openssl/include"
 fi
-
-# Python xor Tensorflow
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 if which to-directory > /dev/null; then eval "$(to-directory --init)"; fi
