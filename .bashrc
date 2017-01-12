@@ -90,7 +90,7 @@ export HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
 export HISTSIZE=100000
 # Enable sharing of history between parallel terminal sessions.
-# export HIST_SYNC_COMMAND="history -a; history -c; history -r"
+export HIST_SYNC_COMMAND="history -a; history -c; history -r"
 
 # Append to the existing PROMPT_COMMAND so that terminal and tab titles retain
 # the default behavior.
@@ -102,15 +102,10 @@ if [ -f $(brew --prefix)/etc/bash_completion.d/adb-completion.bash ]; then
   source $(brew --prefix)/etc/bash_completion.d/adb-completion.bash
 fi
 
-export FUCHSIA_WORKSPACE="${CODE}/fuchsia"
-if [ -d $FUCHSIA_WORKSPACE ]; then
-  export PATH="${FUCHSIA_WORKSPACE}/.jiri_root/bin:$PATH"
-  export JIRI_ROOT="${FUCHSIA_WORKSPACE}"
-  source "${FUCHSIA_WORKSPACE}/scripts/env.sh"
-fi
-
-if [[ -d "${CODE}/flutter" ]]; then
-  export PATH="${CODE}/flutter/bin:${PATH}"
+export FUCHSIA_DIR="${CODE}/fuchsia"
+if [ -d $FUCHSIA_DIR ]; then
+  export PATH="${FUCHSIA_DIR}/.jiri_root/bin:$PATH"
+  source "${FUCHSIA_DIR}/scripts/env.sh"
 fi
 
 if [[ -d "${BREW_PREFIX}/opt/android-sdk" ]]; then
