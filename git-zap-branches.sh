@@ -2,7 +2,7 @@
 zap() {
   echo "$@"
   while true; do
-    read -p "Are you sure you want to zap these brances? " yn
+    read -p "Are you sure you want to zap these branches? " yn
     case $yn in
         [Yy]* ) echo "$@" | xargs git branch -D; break;;
         [Nn]* ) exit;;
