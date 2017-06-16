@@ -85,6 +85,9 @@ export RUST_SRC_PATH="$HOME/Code/rust/src"
 # added by travis gem
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
+# shopt -s histappend
+# PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+
 # Experiment with HISTORY.
 export HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
@@ -94,7 +97,7 @@ export HIST_SYNC_COMMAND="history -a; history -c; history -r"
 
 # Append to the existing PROMPT_COMMAND so that terminal and tab titles retain
 # the default behavior.
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND} ${HIST_SYNC_COMMAND}"
+export PROMPT_COMMAND="${HIST_SYNC_COMMAND};${PROMPT_COMMAND:+$PROMPT_COMMAND}"
 
 export HISTFILESIZE=1000000
 
