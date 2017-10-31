@@ -1,4 +1,5 @@
-  # PATH and common settings go here, .bashrc is loaded when new windows are opened
+# PATH and common settings go here, .bashrc is loaded when new windows are
+# opened
 #
 # .bash_profile is executed for login shells, while .bashrc is executed for
 # interactive non-login shells.
@@ -103,9 +104,11 @@ if [ -f $(brew --prefix)/etc/bash_completion.d/adb-completion.bash ]; then
 fi
 
 export FUCHSIA_DIR="${CODE}/fuchsia"
-if [ -d $FUCHSIA_DIR ]; then
+export FUCHSIA_ENV="${FUCHSIA_DIR}/scripts/env.sh"
+if [[ -d $FUCHSIA_DIR && -f $FUCHSIA_ENV ]]; then
   export PATH="${FUCHSIA_DIR}/.jiri_root/bin:$PATH"
-  source "${FUCHSIA_DIR}/scripts/env.sh"
+  export PATH="${FUCHSIA_DIR}/out/build-zircon/tools:$PATH"
+  source $FUCHSIA_ENV
 fi
 
 if [[ -d "${BREW_PREFIX}/opt/android-sdk" ]]; then
