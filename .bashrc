@@ -104,11 +104,9 @@ if [ -f $(brew --prefix)/etc/bash_completion.d/adb-completion.bash ]; then
 fi
 
 export FUCHSIA_DIR="${CODE}/fuchsia"
-export FUCHSIA_ENV="${FUCHSIA_DIR}/scripts/env.sh"
-if [[ -d $FUCHSIA_DIR && -f $FUCHSIA_ENV ]]; then
+if [[ -d $FUCHSIA_DIR ]]; then
   export PATH="${FUCHSIA_DIR}/.jiri_root/bin:$PATH"
   export PATH="${FUCHSIA_DIR}/out/build-zircon/tools:$PATH"
-  source $FUCHSIA_ENV
 fi
 
 if [[ -d "${BREW_PREFIX}/opt/android-sdk" ]]; then
