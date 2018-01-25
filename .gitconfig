@@ -35,15 +35,13 @@
   required = true
 [alias]
   zap-branches = !sh ~/.dotfiles/git-zap-branches.sh
-  cl = push origin HEAD:refs/for/master
+  cl = !sh ~/.dotfiles/git-cl.sh
 [transfer]
   fsckobjects = true
 [fetch]
   fsckobjects = true
 [receive]
   fsckObjects = true
-[interactive]
-	diffFilter = diff-highlight
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52

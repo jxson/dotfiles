@@ -99,22 +99,23 @@ export PROMPT_COMMAND="${HIST_SYNC_COMMAND} ${PROMPT_COMMAND:+$PROMPT_COMMAND}"
 
 export HISTFILESIZE=1000000
 
-if [ -f $(brew --prefix)/etc/bash_completion.d/adb-completion.bash ]; then
-  source $(brew --prefix)/etc/bash_completion.d/adb-completion.bash
-fi
 
 export FUCHSIA_DIR="${CODE}/fuchsia"
 if [[ -d $FUCHSIA_DIR ]]; then
   export PATH="${FUCHSIA_DIR}/.jiri_root/bin:$PATH"
   export PATH="${FUCHSIA_DIR}/out/build-zircon/tools:$PATH"
-fi
 
-if [[ -d "${BREW_PREFIX}/opt/android-sdk" ]]; then
-    export ANDROID_HOME="${BREW_PREFIX}/opt/android-sdk"
-fi
+  function jiri-snapshot() {
+    local now=$(date +%s)
+    echo "=> generating //snapshots/${now}"
+    jiri snapshot "${FUCHSIA_DIR}/snapshots/${now}"
+  }
 
-if [[ -d "${BREW_PREFIX}/opt/android-ndk" ]]; then
-    export NDK_HOME="${BREW_PREFIX}/opt/android-ndk"
+  function jiri-snapdate() {
+    jiri-snapshot
+    echo "=> updating source tree"
+    jiri update -gc
+  }
 fi
 
 # Open SSL Set up for custom homebrew location.
