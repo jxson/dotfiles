@@ -53,6 +53,6 @@
 [difftool "Kaleidoscope"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [commit]
-  gpgsign = true
+  gpgsign = false
 [gpg]
   program = gpg

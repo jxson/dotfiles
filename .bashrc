@@ -11,34 +11,33 @@
 # (The situation with LLVM and Ruby may improve. This is as of 07-23-2011.)
 # export CC=gcc-4.2
 
-export COLOR_NONE='\[\e[0m\]' # No Color
-export COLOR_LIGHT_PURPLE='\[\e[1;35m\]'
-export COLOR_ELECTRIC_YELLOW='\[\e[0;93m\]'
+export DOTFILES="${HOME}/.dotfiles"
+export PATH="${PATH}:/usr/local/bin"
+export CODE="${HOME}/code"
+export OS=${OSTYPE//[0-9.-]*/}
 
-# Adds ~/.homebrew to path
-export BREW_PREFIX="${HOME}/.homebrew"
-export CODE="${HOME}/Code"
+if [[ $OS == "darwin" ]]; then
+  export BREW_PREFIX="${HOME}/.homebrew"
 
-# TODO: Check for brew path and install if it is missing.
+  if [[ -d "${BREW_PREFIX}" ]]; then
+    # Brew prefix first for easier overrides of OS X defaults.
+    export PATH="${BREW_PREFIX}/bin:${PATH}"
+    source "${DOTFILES}/homebrew.sh"
+    homebrew $(brew --prefix)
+  else
+    echo "=> Homebrew is not installed, install instructions at http://brew.sh"
+  fi
+else
+  if ! shopt -oq posix; then
+    completion_files=("/usr/share/bash-completion/bash_completion", "/etc/bash_completion")
 
-export PATH="${BREW_PREFIX}/bin:$PATH"
-export PATH=/usr/local/bin:$PATH
-export PATH=./node_modules/.bin:$PATH
-
-if [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
-  source $(brew --prefix)/etc/bash_completion.d/git-completion.bash
-fi
-
-if [ -f $(brew --prefix)/etc/bash_completion.d/npm ]; then
-  source $(brew --prefix)/etc/bash_completion.d/npm
-fi
-
-if [ -f $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]; then
-  source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
-fi
-
-if [ -f $(brew --prefix)/opt/autoenv/activate.sh ]; then
-  source $(brew --prefix)/opt/autoenv/activate.sh
+    # Source completion files added from brew installs.
+    for f in "${completion_files[@]}"; do
+      if [ -f "${f}" ]; then
+        source "${f}"
+      fi
+    done
+  fi
 fi
 
 # Get the name of the branch we are on
@@ -58,30 +57,29 @@ git_status() {
   fi
 }
 
+export COLOR_NONE='\[\e[0m\]' # No Color
+export COLOR_LIGHT_PURPLE='\[\e[1;35m\]'
+export COLOR_ELECTRIC_YELLOW='\[\e[0;93m\]'
+
 PS1=$COLOR_LIGHT_PURPLE'\u'$COLOR_NONE' at '$COLOR_ELECTRIC_YELLOW'\h'$COLOR_NONE' in \w $(git_prompt_info)\n'$COLOR_ELECTRIC_YELLOW'→ '$COLOR_NONE
 
 alias grep='grep --color=auto'
 alias ls='ls -G -l'
 alias rm='rm -i'
-alias sketch='open -a /Applications/Sketch.app/'
-alias pixelmator='open -a /Applications/Pixelmator.app'
 
-if [ -f ~/.nvm/nvm.sh ]; then
-  source ~/.nvm/nvm.sh
-  [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+export NVM_DIR="${HOME}/.nvm"
+if [[ -d "${NVM_DIR}" ]]; then
+  [[ -f "${NVM_DIR}/nvm.sh" ]] && . "${NVM_DIR}/nvm.sh"
+  [[ -f "${NVM_DIR}/bash_completion" ]] && . "${NVM_DIR}/bash_completion"
 fi
 
 if [ -f $(which atom) ]; then
   export EDITOR="$(which atom)"
 fi
 
-# Rust
 # SEE: https://www.rustup.rs
 export PATH="$HOME/.cargo/bin:$PATH"
-# CARGO_HOME & RUST_SRC_PATH required for racer
-# SEE: https://github.com/phildawes/racer
 export CARGO_HOME="$HOME/.cargo"
-export RUST_SRC_PATH="$HOME/Code/rust/src"
 
 # added by travis gem
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
@@ -104,24 +102,6 @@ export FUCHSIA_DIR="${CODE}/fuchsia"
 if [[ -d $FUCHSIA_DIR ]]; then
   export PATH="${FUCHSIA_DIR}/.jiri_root/bin:$PATH"
   export PATH="${FUCHSIA_DIR}/out/build-zircon/tools:$PATH"
-
-  function jiri-snapshot() {
-    local now=$(date +%s)
-    echo "=> generating //snapshots/${now}"
-    jiri snapshot "${FUCHSIA_DIR}/snapshots/${now}"
-  }
-
-  function jiri-snapdate() {
-    jiri-snapshot
-    echo "=> updating source tree"
-    jiri update -gc
-  }
-fi
-
-# Open SSL Set up for custom homebrew location.
-# SEE: brew info openssl
-if [[ -d "${BREW_PREFIX}/opt/openssl/include" ]]; then
-    export CFLAGS="-I${BREW_PREFIX}/opt/openssl/include"
 fi
 
 if which to-directory > /dev/null; then eval "$(to-directory --init)"; fi
