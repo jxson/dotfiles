@@ -104,3 +104,8 @@ if [[ -d $FUCHSIA_DIR ]]; then
 fi
 
 if which to-directory > /dev/null; then eval "$(to-directory --init)"; fi
+
+export FLUTTER_DIR="${CODE}/flutter"
+if [[ -d $FLUTTER_DIR ]]; then
+  export PATH="${FLUTTER_DIR}/bin:$PATH"
+fi
