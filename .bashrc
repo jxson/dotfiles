@@ -17,9 +17,10 @@ export CODE="${HOME}/code"
 export OS=${OSTYPE//[0-9.-]*/}
 
 if [[ $OS == "darwin" ]]; then
-  export BREW_PREFIX="${HOME}/.homebrew"
+  # Is Homebrew installed?
+  if hash brew 2>/dev/null; then
+    export BREW_PREFIX="$(brew --prefix)"
 
-  if [[ -d "${BREW_PREFIX}" ]]; then
     # Brew prefix first for easier overrides of OS X defaults.
     export PATH="${BREW_PREFIX}/bin:${PATH}"
     source "${DOTFILES}/homebrew.sh"
