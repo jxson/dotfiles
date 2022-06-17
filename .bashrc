@@ -17,10 +17,11 @@ export CODE="${HOME}/code"
 export OS=${OSTYPE//[0-9.-]*/}
 
 if [[ $OS == "darwin" ]]; then
-  # Is Homebrew installed?
-  if hash brew 2>/dev/null; then
-    export BREW_PREFIX="$(brew --prefix)"
+  # Homebrew should be installed here
+  export BREW_PREFIX="${HOME}/.homebrew"
 
+  # Is Homebrew installed?
+  if [[ -d "${BREW_PREFIX}" ]]; then
     # Brew prefix first for easier overrides of OS X defaults.
     export PATH="${BREW_PREFIX}/bin:${PATH}"
     source "${DOTFILES}/homebrew.sh"
@@ -67,6 +68,9 @@ PS1=$COLOR_LIGHT_PURPLE'\u'$COLOR_NONE' at '$COLOR_ELECTRIC_YELLOW'\h'$COLOR_NON
 alias grep='grep --color=auto'
 alias ls='ls -G -l'
 alias rm='rm -i'
+
+# GPG 
+export GPG_TTY=$(tty)
 
 export NVM_DIR="${HOME}/.nvm"
 if [[ -d "${NVM_DIR}" ]]; then
